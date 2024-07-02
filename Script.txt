@@ -1,0 +1,258 @@
+CREATE TABLE Customer_Category (
+    Customer_Category_Id INT PRIMARY KEY,
+    Customer_Category VARCHAR(50) NOT NULL,
+    Discount_Rate NUMBER NOT NULL
+Desc Customer_Category;
+INSERT INTO Customer_Category (Customer_Category_Id, Customer_Category, Discount_Rate)
+VALUES (1, 'Regular', 0),
+       (2, 'Staff', 5),
+       (3, 'VIP', 10);
+INSERT INTO Customer_Category values (1, 'Reguglar', 0); 
+INSERT INTO Customer_Category values (2, 'Staff', 5);
+INSERT INTO Customer_Category values (3, 'VIP', 10);
+Select * from Customer_Category;
+CREATE TABLE Customer (
+    Customer_Id INT PRIMARY KEY,
+    Customer_Name VARCHAR(100) NOT NULL,
+    Customer_Address VARCHAR(50) NOT NULL,
+    Customer_Contact NUMBER NOT NULL,
+    Customer_Category_Id INT,
+    FOREIGN KEY (Customer_Category_Id) REFERENCES Customer_Category(Customer_Category_Id)
+);
+Desc Customer;
+SQL> INSERT INTO Customer values (1, 'Siddhartha Shrestha', 'Itahari-20', 9827077493, 1);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (2, 'Alish Ban', 'Itahari-19', 9800919170, 3);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (3, 'David Guragian', 'Itahari-04', 9826455605, 1);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (4, 'Anish Turi', 'Itahari-19', 9807082487, 2);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (5, 'Chiran Rai', 'Itahari-20', 9812370508, 3);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (6, 'Snajeev Pachdhami', 'Itahari-01', 9810497401, 3);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (7, 'Chuchu Hang Limbu', 'Damak-06', 9816980506, 2);
+
+1 row created.
+
+SQL> INSERT INTO Customer values (8, 'Alyush Vlai', 'Damak-06', 9876453674, 3);
+
+1 row created.
+Select * from Customer;
+SQL> CREATE TABLE Product_Category (
+2 Product_Category_Id INT PRIMARY KEY,
+3 Product_Category_Type VARCHAR (100) NOT        NULL
+4 );
+Table created.
+Desc Product_Category;
+SQL> INSERT INTO Product_Category values (1, 'Premium');
+1 row created.
+SQL> INSERT INTO Product_Category values (2, 'Electronics');
+1 row created.
+SQL> INSERT INTO Product_Category values (3, Outdoor');
+1 row created.
+SQL> INSERT INTO Product_Category values (4, 'Toys');
+1 row created.
+SQL> INSERT INTO Product_Category values (5, 'Sports');
+1 row created.
+Select * from Product_Category;
+i.	Creating Vendor table
+CREATE TABLE Vendor (
+    Vendor_Id INT PRIMARY KEY,
+    Vendor_Name VARCHAR(100) NOT NULL
+);
+SQL> CREATE TABLE Vendor (
+  2      Vendor_Id INT PRIMARY KEY,
+  3      Vendor_Name VARCHAR(100) NOT NULL
+  4  );
+Desc Vendor;
+SQL> INSERT INTO Vendor values (1, 'Guy1');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (2, 'Guy2');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (3, 'Guy3');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (4, 'Guy4');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (5, 'Guy5');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (6, 'Guy6');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (7, 'Guy7');
+
+1 row created.
+
+SQL> INSERT INTO Vendor values (8, 'Guy8');
+
+1 row created.
+Select * from Vendor;
+CREATE TABLE Product (
+    Product_Id INT PRIMARY KEY,
+    Prod_Name VARCHAR(100) NOT NULL,
+    Price NUMBER NOT NULL,
+    Stock INT NOT NULL,
+    Product_Category_Id INT,
+    Vendor_Id INT,
+    FOREIGN KEY (Product_Category_Id) REFERENCES Product_Category(Product_Category_Id),
+    FOREIGN KEY (Vendor_Id) REFERENCES Vendor(Vendor_Id)
+);
+
+Desc Product;
+SQL> INSERT INTO Product values (1, 'Smartphone', 1050, 7, 2, 3);
+1 row created.
+SQL> INSERT INTO Product values (2, 'Laptop', 20000, 5, 2, 4);
+1 row created.
+SQL> INSERT INTO Product values (3, 'T-shirt', 580, 7, 2, 5);
+1 row created.
+SQL> INSERT INTO Product values (4, 'Wireless earbud', 5000, 4, 5, 7);
+row created.
+SQL > INSERT INTO Product values (6, Compact camera', 50000, 7, 3, 1);
+1 row created.
+SOL> INSERT INTO Product values (7, 'Portable charger', 4555, 1, 1, 1);
+Select * from Product;
+i.	Creating Payment table
+CREATE TABLE Payment (
+    Payment_Id INT PRIMARY KEY,
+    Payment_Type VARCHAR(50) NOT NULL
+);
+SQL> INSERT INTO Payment VALUES (1, 'Debit card');
+1 row created.
+SQL> INSERT INTO Payment VALUES (2, 'Bank transfer');
+1
+row created.
+SQL> INSERT INTO Payment VALUES (3, 'Cash');
+1 row created.
+SQL> INSERT INTO Payment VALUES (4, 'Cryptocurrency');
+1 row created.
+SQL> INSERT INTO Payment VALUES (5, 'Vouchers');
+1
+row created.
+SQL> INSERT INTO Payment VALUES (6, 'Paypal');
+1
+row created.
+SQL> INSERT INTO Payment VALUES (7, 'Apple pay');
+1 row created.
+
+Desc payment;
+Select * from Payment;
+SQL> create table orderDetails (
+2 orderID number not null primary key,
+3 quantity number,
+4 TotalPrice number,
+5 UnitPrice number,
+6 customer_ID int
+7 ,
+8 Payment_ID int,
+9 Foreign key(customer_ID) references customer (customer_id),
+10 Foreign key (Payment_ID) references payment (Payment_id)
+11 );
+
+Table created.
+SQL> INSERT INTO orderDetails VALUES (1, 30, 3000, 255, 4, 1);
+- row created.
+SQL> INSERT INTO orderDetails VALUES (2, 22, 1000, 340, 1, 2);
+row created.
+SQL> INSERT INTO orderDetails VALUES (3, 56, 44000, 3550, 2, 3);
+1 row created.
+SQL> INSERT INTO orderDetails VALUES (4, 44, 10000, 500, 3, 5);
+1 row created.
+SQL> INSERT INTO orderDetails VALUES (5, 27, 4000, 600, 5, 6);
+1 row created.
+SQL> INSERT INTO orderDetails VALUES (6, 34, 16000, 800, 6, 7);
+1 row created.
+SQL> INSERT INTO orderDetails VALUES (7, 54, 13000, 580, 7, 4);
+1 row created.
+SQL> INSERT INTO orderDetails VALUES (8, 43, 17000, 660, 8, 3);
+1 row created.
+Select * from orderDetails;
+SQL> CREATE TABLE Orders
+2 orderID int,
+3 Product_ID int,
+4 FOREIGN KEY (OrderId) REFERENCES OrderDetails (OrderId),
+5  FOREIGN KEY (Product_Id) REFERENCES Product (Product_Id)
+6 );
+Table created.
+SQL> INSERT INTO Orders VALUES (1, 2);
+1 row created.
+SQL> INSERT INTO Orders VALUES (2, 1);
+1 row created.
+SQL> INSERT INTO Orders VALUES (3, 3);
+1 row created.
+SQL> INSERT INTO Orders VALUES (5, 4);
+1 row created.
+SQL> INSERT INTO Orders VALUES (4, 5);
+1 row created.
+SQL> INSERT INTO Orders VALUES (5, 6):
+1 row created.
+5QL> INSERT INTO Orders VALUES (6, 5);
+1 row created.
+SQL> INSERT INTO Orders VALUES (8, 7);
+1 row created.
+SQL> INSERT INTO Orders VALUES (8, 6):
+1 row created.
+Select * from Orders;
+SQL> CREATE TABLE Invoice (
+2 Invoice_Id INT PRIMARY KEY,
+3 orderId INT,
+4 Invoice_Date DATE NOT NULL,
+5 FOREIGN KEY (orderId) REFERENCES Orderdetails (orderId)
+6 );
+Table created.
+SQL> INSERT INTO Invoice VALUES (1, 1, '01-may-2023');
+row created.
+SQL> INSERT INTO Invoice VALUES (2, 3, '04-Jun-2021');
+row created.
+SQL> INSERT INTO Invoice VALUES (3, 4, '05-Jul-2023');
+row created.
+SQL> INSERT INTO Invoice VALUES (4, 5, '05-jul-2024') :
+1 row created.
+SQL> INSERT INTO Invoice VALUES (5, 6, '05-Jul-2020');
+1 row created.
+SQL> INSERT INTO Invoice VALUES (6, 7, '03-Mar-2019*);
+1 row created.
+SQL> INSERT INTO Invoice VALUES (7, 8, '02-Jan-2022');
+1 row created.
+SQL> INSERT INTO Invoice VALUES (8, 2, '05-Dec-2023');
+1 row created.
+
+Select CUSTOMER_NAME, CUSTOMER_CATEGORY_ID FROM CUSTOMER WHERE CUSTOMER_CATEGORY_ID = 2;
+select od.*, p.prod_Name, o.orderID, o.product_ID from orders o inner join product p on o.product_ID = p.product_ID inner join orderDetails od on o.orderID = od.orderID where od.order_Date between '01-MAY-2023' AND '28-MAY-2023';
+ select c.customer_Name, orderDetails.* from customer c left join orderDetails on c.customer_ID = orderDetails.customer_ID;
+select * from product where prod_Name like '_a%' and stock > 50;
+
+ select c.customer_Name, od.order_Date from customer c inner join orderDetails od on c.customer_ID = od.customer_ID
+  2    where od.order_Date = (select max(order_Date) from orderDetails);
+select sum(totalPrice) as Revenue, MonthRevenue from (select totalPrice, Extract (month from order_Date) as MonthRevenue from orderDetails) group by MonthRevenue;
+select * from orderDetails where
+  2   totalPrice >= (select avg(totalPrice) from orderDetails);
+select * from vendor where vendor_ID in (select vendor_ID from product group by vendor_ID having count (*)>3);
+select * from ( select p.*, count(o.orderID) as counts from product p inner join orders o on p.product_ID = o.product_ID
+  2     Group by p.product_ID, p.prod_Name, p.price, p.stock, p.vendor_ID, p.product_Category_ID order by counts desc)
+  3     where ROWNUM <=3;
+select * from (select c.customer_ID, c.customer_Name, sum(od.totalPrice) as Total from customer c join orderDetails od on c.customer_ID = od.customer_ID
+  2   where extract (month from od.order_Date) = 8 GROUP by c.customer_ID, c.customer_Name order by Total desc) where ROWNUM =1;
